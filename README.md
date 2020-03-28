@@ -1,5 +1,3 @@
-Team Name: (any suggestions?)
-
 Team Members: 
 | Name        | email           |Task|
 | :-------------: |:-------------:|:-------------:|
