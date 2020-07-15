@@ -17,7 +17,7 @@ This is the project repo for the final project of the Udacity Self-Driving Car N
 
 ### Implementation
 * Code Structure
-![ros_structure](/imgs/ros_structure.png)
+![ros_structure](./imgs/ros_structure.png)
 * TODO Lists:
   * waypoint_updater: This node will publish waypoints from the car's current position to some 'x' distance ahead
   * dbw_node: **drive-by-wire node**, which will subscribe to **twist_cmd** and use various controllers to provide appropriate throttle, brake, and steering commands. These commands can then be published to the following topics:
@@ -30,14 +30,17 @@ This is the project repo for the final project of the Udacity Self-Driving Car N
     
     * Use the camera image data to classify the color of the traffic light.
     
-  * tl_classifier: Take the **BGR Image** as input, output the **ID of traffic light color** (specified in `styx_msgs/TrafficLight`) <br>We used the [Object Detection Lab]( https://github.com/udacity/CarND-Object-Detection-Lab) and replaced the pb-file with our pretrained model file (Training Process will be described below) [frozen_inference_graph_sim.pb](/src/ros/tl_detector/light_classification/frozen_inference_graph_sim.pb) for simulation and for the on-site test we will implemnet a different model [frozen_inference_graph_site.pb](/src/ros/tl_detector/light_classification/frozen_inference_graph_site.pb).<br>
+  * tl_classifier: Take the **BGR Image** as input, output the **ID of traffic light color** (specified in `styx_msgs/TrafficLight`) <br>We used the [Object Detection Lab]( https://github.com/udacity/CarND-Object-Detection-Lab) and replaced the pb-file with our pretrained model file (Training Process will be described below) [frozen_inference_graph_sim.pb](./src/ros/tl_detector/light_classification/frozen_inference_graph_sim.pb) for simulation and for the on-site test we will implemnet a different model [frozen_inference_graph_site.pb](/src/ros/tl_detector/light_classification/frozen_inference_graph_site.pb).<br>
   * Object detection model training: We use [MobileNet SSD](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/detection_model_zoo.md) to detect the differenr traffic light signals. It is accurate and fast, takes just about 60ms to process a frame using a laptop's CPU (Intel(R) Core(TM) i5-8265U CPU @ 1.60GHz). We trained each model for 200k steps (batch size = 24) on google cloud platform using NVIDIA® Tesla® K80 based on the pretrained COCO model. The mean Average Precision in simulation task can be over 0.95 at 0.50IOU, and over 0.88 at 0.50IOU in on-site task. In fact we first trained the on-site detector based on the [Bosch Small Traffic Lights Dataset](https://hci.iwr.uni-heidelberg.de/node/6132), but it behaved very poor on the on-site images, then we directly turn to the on-site images (very small dataset).
 
 ### Results
 * **Test video of Simulation**, click the figure below:<br>[![ScreenShot](/imgs/test_sim.png)](https://www.youtube.com/watch?v=m2vrWBcxkZs&feature=youtu.be)<br>
 
+* A snippet of the off-site Simulation:<br>
+![Alt Text](./imgs/CarCapstone.gif)
+
 * A snippet of the on-site traffic light detection is shown here:<br>
-<img src="imgs/on-site-snippet.png">
+<img src="./imgs/on-site-snippet.png">
 
 Please use **one** of the two installation options, either native **or** docker installation.
 
